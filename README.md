@@ -1,6 +1,6 @@
 <img src="https://user-images.githubusercontent.com/8730447/32693954-511faf46-c702-11e7-99a2-fd8249830fec.png" width="150">
 
-A supervised ML application to determine if two records containing PII (Personally Identifiable Information) are the same person. Utilizes the [Gradient Boosted Decision Trees algorithm](https://en.wikipedia.org/wiki/Gradient_boosting).
+A supervised ML application to determine if two records containing PII (Personally Identifiable Information) are the same person. Utilizes the [Gradient Boosted Decision Trees algorithm](https://en.wikipedia.org/wiki/Gradient_boosting) alongside the [Levenshtein distance metric](https://en.wikipedia.org/wiki/Levenshtein_distance).
 
 ## Concept
 Given two (2) records containg PII, determine if they are the same person.
@@ -10,11 +10,21 @@ Given two (2) records containg PII, determine if they are the same person.
 
 In this dataset, we can see that Bob Dylan and Robert Dylan are the same person. Furthermore, we can see that not _all_ data is required for us to come to that deduction. Visually we can conclude that the two are the same, but it's much more difficult for a computer to do the same.
 
-#### Proposed Original Method
-One other method we could use to arrive at a conclusion is to utilize the [Levenshtein distance string metric algorithm](https://en.wikipedia.org/wiki/Levenshtein_distance), though, this can become very slow depending on the size of our dataset and is sometimes unreliable.
+#### Levenshtein Distance
+One method we could use to assist in arriving at a conclusion is to utilize the [Levenshtein distance string metric algorithm](https://en.wikipedia.org/wiki/Levenshtein_distance) to provide weighted values on our data.
 
-##### What is Levenshtein distance?
 Levenshtein distance (LD) is a measure of the similarity between two strings, which we will refer to as the source string (s) and the target string (t). The distance is the number of deletions, insertions, or substitutions required to transform s into t. For example:
 
 - If s is "test" and t is "test", then LD(s,t) = 0, because no transformations are needed. The strings are already identical.
 - If s is "test" and t is "tent", then LD(s,t) = 1, because one substitution (change "s" to "n") is sufficient to transform s into t.
+
+Using LD on our example dataset and storing each distance in an array `distances` yields:
+```
+ => [4, 0, 17, 13, 9, 5, 0, 12]
+```
+The mean of `distances` gives us an averaged distance of `7.5`. As you can see, our data (in its worst case) is too complex for this algorithm to produce a binary classification of `1` or `0` (yes they are the same, no they aren't the same).
+
+As a result, we must turn to other methods of classifying this data while still utilizing a weighted average; like the one we got from LD.
+
+#### Gradient Boosted Decision Trees
+The second method we could use in conjuction with the LD metric is a Gradient Boosted Decision Tree (GBDT). I won't go over how Gradient Boosting works as it's very in-depth. If you're interested, [this blog](https://gormanalysis.com/gradient-boosting-explained/) provides a good overview. I will also assume the you're familiar with [Decision Trees](https://en.wikipedia.org/wiki/Decision_tree).
