@@ -6,4 +6,5 @@ A supervised classification ML application to determine if two records containin
 Given two (2) records containg PII, determine if they are the same person.
 
 #### Example Dataset
-<img alt="example-dataset" src="https://user-images.githubusercontent.com/8730447/32694943-daa0dd44-c71b-11e7-9798-a32a43bbb3e8.png">
+<img alt="example-dataset" src="https://user-images.githubusercontent.com/8730447/32694951-2f491140-c71c-11e7-84e0-560a1007bf7c.png">
+
