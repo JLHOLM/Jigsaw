@@ -75,9 +75,9 @@ The second method we could use in conjuction with the LD metric is a Gradient Bo
 {
   'id': ['1'],
   'first_name': ['Robert'],
-  'last_name': ['Dylon'],
+  'last_name': ['Dilon'],
   'address_street': ['Francisco Street'],
-  'address_city': ['San Fran'],
+  'address_city': [''],
   'address_state': ['CA'],
   'address_zipcode': [''],
   'date_of_birth': ['1941/05/24'],
