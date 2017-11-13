@@ -12,6 +12,11 @@ In this dataset, we can see that Bob Dylan and Robert Dylan are the same person.
 
 This is a classic example of data matching. Data matching refers to the process of identifying when two entities are the same entity, such as whether or not two tuples (Bob Dylan, California, 1941/05/24) and (Bob Dilon, CA, 1941/05/24) refer to the same real-world identity. This problem is also referred to as record linkage, entity matching, deduplication, etc.
 
+#### String Metric Algorithms
+- **Jaccard Similarity**
+- **Levenshtein Distance**
+- **Extact Match**
+
 #### Levenshtein Distance
 One method we could use to assist in arriving at a conclusion is to utilize the [Levenshtein distance string metric algorithm](https://en.wikipedia.org/wiki/Levenshtein_distance) to provide weighted values on our data.
 
