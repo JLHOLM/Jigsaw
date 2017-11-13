@@ -1,6 +1,6 @@
 <img src="https://user-images.githubusercontent.com/8730447/32693954-511faf46-c702-11e7-99a2-fd8249830fec.png" width="150">
 
-A supervised ML application to determine if two records containing PII (Personally Identifiable Information) are the same person. Utilizes the [Gradient Boosted Decision Trees algorithm](https://en.wikipedia.org/wiki/Gradient_boosting) alongside the [Levenshtein distance metric](https://en.wikipedia.org/wiki/Levenshtein_distance).
+A supervised ML application to determine if two records containing PII (Personally Identifiable Information) are the same person. Utilizes the [Gradient Boosted Decision Trees algorithm](https://en.wikipedia.org/wiki/Gradient_boosting) alongside multiple string metric algorithms.
 
 ## Concept
 Given two (2) records containg PII, determine if they are the same person.
@@ -9,6 +9,8 @@ Given two (2) records containg PII, determine if they are the same person.
 <img alt="example-dataset" src="https://user-images.githubusercontent.com/8730447/32694951-2f491140-c71c-11e7-84e0-560a1007bf7c.png">
 
 In this dataset, we can see that Bob Dylan and Robert Dylan are the same person. Furthermore, we can see that not _all_ data is required for us to come to that deduction. Visually we can conclude that the two are the same, but it's much more difficult for a computer to do the same.
+
+This is a classic example of data matching. Data matching refers to the process of identifying when two entities are the same entity, such as whether or not two tuples (Bob Dylan, California, 1941/05/24) and (Bob Dilon, CA, 1941/05/24) refer to the same real-world identity. This problem is also referred to as record linkage, entity matching, deduplication, etc.
 
 #### Levenshtein Distance
 One method we could use to assist in arriving at a conclusion is to utilize the [Levenshtein distance string metric algorithm](https://en.wikipedia.org/wiki/Levenshtein_distance) to provide weighted values on our data.
