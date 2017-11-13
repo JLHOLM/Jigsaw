@@ -30,3 +30,57 @@ As a result, we must turn to other methods of classifying this data while still 
 
 #### Gradient Boosted Decision Trees
 The second method we could use in conjuction with the LD metric is a Gradient Boosted Decision Tree (GBDT). I won't go over how Gradient Boosting works as it's very in-depth. If you're interested, [this blog](https://gormanalysis.com/gradient-boosting-explained/) provides a good overview. I will also assume the you're familiar with [Decision Trees](https://en.wikipedia.org/wiki/Decision_tree).
+
+#### Training Dataset Structure
+```
+{
+  '_id': ['1'],
+  'ltable_id': ['1'],
+  'rtable_id': ['1'],
+  'ltable_first_name': ['Bob'],
+  'ltable_last_name': ['Dylan'],
+  'ltable_address_street': ['1234 Francisco St'],
+  'ltable_address_city': ['San Francisco'],
+  'ltable_address_state': ['CA'],
+  'ltable_address_zipcode': ['12345'],
+  'ltable_date_of_birth': ['1941/05/24'],
+  'ltable_phone': ['123-456-7890'],
+  'rtable_first_name': ['Robert'],
+  'rtable_last_name': ['Dilon'],
+  'rtable_address_street': ['Francisco Street'],
+  'rtable_address_city': [''],
+  'rtable_address_state': ['CA'],
+  'rtable_address_zipcode': [''],
+  'rtable_date_of_birth': ['1941/05/24'],
+  'rtable_phone': [''],
+  'prediction': ['1']
+}
+```
+#### Patient A Dataset Structure
+```
+{
+  'id': ['1'],
+  'first_name': ['Bob'],
+  'last_name': ['Dylan'],
+  'address_street': ['1234 Francisco St'],
+  'address_city': ['San Francisco'],
+  'address_state': ['CA'],
+  'address_zipcode': ['12345'],
+  'date_of_birth': ['1941/05/24'],
+  'phone': ['123-456-7890']
+}
+```
+#### Patient B Dataset Structure
+```
+{
+  'id': ['1'],
+  'first_name': ['Robert'],
+  'last_name': ['Dylon'],
+  'address_street': ['Francisco Street'],
+  'address_city': ['San Fran'],
+  'address_state': ['CA'],
+  'address_zipcode': [''],
+  'date_of_birth': ['1941/05/24'],
+  'phone': ['']
+}
+```
