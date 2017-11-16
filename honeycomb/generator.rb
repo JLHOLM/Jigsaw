@@ -10,36 +10,102 @@ class Generator
   #
 
   def initialize
-    puts "Table name: "
-    table_name = gets.chomp
-
-    return "Table name cannot be nil" if table_name.empty?
-
-    puts "# of records for #{table_name} - (default 1000): "
-    total_records = gets.chomp
-
-    data = generate_data(total_records)
-    write_data_to_csv(data, table_name)
   end
 
-  def generate_data(total_records)
-    total_records = total_records.to_i unless total_records.nil?
-    total_records = 1000 if total_records.nil?
+  def create_person
+    [
+      first_name,
+      last_name,
+      address_street,
+      address_city,
+      address_state,
+      address_zipcode,
+      date_of_birth,
+      phone
+    ]
+  end
 
-    temp_array = []
-    temp_array.push(HEADERS)
+  def randomize_person(person)
+    person[0] = random_boolean ? first_name : person[0]
+    person[1] = random_boolean ? last_name : person[1]
+    person[2] = random_boolean ? address_street : person[2]
+    person[3] = random_boolean ? address_city : person[3]
+    person[4] = random_boolean ? address_state : person[4]
+    person[5] = random_boolean ? address_zipcode : person[5]
+    person[6] = random_boolean ? date_of_birth : person[6]
+    person[7] = random_boolean ? phone : person[7]
+    person
+  end
 
-    0..total_records.times do |id|
-      row = []
-      row.push(
-        id, first_name, last_name, address_street,
-        address_city, address_state, address_zipcode,
-        date_of_birth, phone)
+  def create_person_a(person)
+    [
+      person[0],
+      person[1],
+      person[2],
+      person[3],
+      person[4],
+      person[5],
+      person[6],
+      person[7]
+    ]
+  end
 
-      temp_array.push(row)
+  def create_person_b(person)
+    [
+      random_boolean ? fun(person[0]) : person[0], # First Name
+      random_boolean ? fun(person[1]) : person[1], # Last Name
+      random_boolean ? fun(person[2]) : person[2], # Address Street
+      random_boolean ? fun(person[3]) : person[3], # Address City
+      random_boolean ? fun(person[4]) : person[4], # Address State
+      random_boolean ? fun(person[5]) : person[5], # Address Zipcode
+      person[6],                                          # Date of Birth
+      person[7]                                           # Phone
+    ]
+  end
+
+  def fun(string)
+    first, *middle, last = string.chars
+    [first, middle.shuffle, last].join
+  end
+
+  def generate_data
+    dataset_a = [HEADERS]
+    dataset_b = [HEADERS]
+
+    persons = 4000.times.map do
+      create_person
     end
+    progress_print("Generating Normalized Identities")
+    puts
 
-    temp_array
+    1000.times do
+      person = randomize_person(persons.sample)
+      dataset_a << create_person_a(person)
+    end
+    progress_print("Generating 1st Dataset")
+    puts
+
+    1000.times do
+      person = persons.sample
+      dataset_b << create_person_b(person)
+    end
+    progress_print("Generating 2nd Dataset")
+    puts
+
+    write_data_to_csv(dataset_a, "dataset_a")
+    progress_print("Writing 1st Dataset To CSV")
+    puts
+
+    write_data_to_csv(dataset_b, "dataset_b")
+    progress_print("Writing 2nd Dataset To CSV")
+    puts
+  end
+
+  def random_boolean
+    [
+      true, false, false, true, true, false, true, false, true, true, false,
+      true, true, true, false, true, false, false, true, false, true, false
+    ].sample
   end
 
   def write_data_to_csv(data, table_name)
@@ -50,6 +116,13 @@ class Generator
         csv << CSV.generate_line(row)
       }.join(""))
     }
+  end
+
+  def progress_print(action_name)
+    0.upto(100) do |i|
+      printf("\r#{action_name}: %d%", i)
+      sleep(0.003)
+    end
   end
 
   def first_name
@@ -85,7 +158,6 @@ class Generator
   end
 
   HEADERS = [
-    'id',
     'first_name',
     'last_name',
     'address_street',
@@ -97,4 +169,4 @@ class Generator
   ].freeze
 end
 
-Generator.new()
+Generator.new.generate_data
