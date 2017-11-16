@@ -86,7 +86,7 @@ class Generator
     puts
 
     1000.times do
-      person = persons.sample
+      person = dataset_a.sample
       dataset_b << create_person_b(person)
     end
     progress_print("Generating 2nd Dataset")
