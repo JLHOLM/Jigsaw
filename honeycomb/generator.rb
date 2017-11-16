@@ -1,5 +1,7 @@
 require 'faker'
+require 'date'
 require 'csv'
+require './importer'
 
 class Generator
   #
@@ -76,29 +78,27 @@ class Generator
       create_person
     end
     progress_print("Generating Normalized Identities")
-    puts
 
     1000.times do
       person = randomize_person(persons.sample)
       dataset_a << create_person_a(person)
     end
     progress_print("Generating 1st Dataset")
-    puts
 
     1000.times do
       person = dataset_a.sample
       dataset_b << create_person_b(person)
     end
     progress_print("Generating 2nd Dataset")
-    puts
 
     write_data_to_csv(dataset_a, "dataset_a")
     progress_print("Writing 1st Dataset To CSV")
-    puts
 
     write_data_to_csv(dataset_b, "dataset_b")
     progress_print("Writing 2nd Dataset To CSV")
-    puts
+
+    import_to_psql('dataset_a', './dataset_a.csv')
+    import_to_psql('dataset_b', './dataset_b.csv')
   end
 
   def random_boolean
@@ -118,11 +118,16 @@ class Generator
     }
   end
 
+  def import_to_psql(table_name, file)
+    Importer.new(table_name, file).import
+  end
+
   def progress_print(action_name)
     0.upto(100) do |i|
       printf("\r#{action_name}: %d%", i)
       sleep(0.003)
     end
+    puts
   end
 
   def first_name
@@ -150,7 +155,7 @@ class Generator
   end
 
   def date_of_birth
-    (Time.now - rand(15552000)).strftime('%Y/%m/%d')
+    Time.at(rand * Time.now.to_i).strftime("%Y-%m-%d")
   end
 
   def phone
