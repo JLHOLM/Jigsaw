@@ -10,7 +10,7 @@ Given two (2) records containg PII, determine if they are the same person.
 
 In this dataset, we can see that Bob Dylan and Robert Dylan are the same person. Furthermore, we can see that not _all_ data is required for us to come to that deduction. Visually we can conclude that the two are the same, but it's much more difficult for a computer to do the same.
 
-This is a classic example of data matching. Data matching refers to the process of identifying when two entities are the same entity, such as whether or not two tuples (Bob Dylan, California, 1941/05/24) and (Bob Dilon, CA, 1941/05/24) refer to the same real-world identity. This problem is also referred to as record linkage, entity matching, deduplication, etc.
+This is a classic example of data linkage. Data linkage refers to the process of identifying when two entities are the same entity, such as whether or not two tuples (Bob Dylan, California, 1941/05/24) and (Bob Dilon, CA, 1941/05/24) refer to the same real-world identity. This problem is also referred to as record linkage, entity matching, deduplication, etc.
 
 #### String Metric Algorithms
 - **Jaccard Similarity**
@@ -89,3 +89,6 @@ The second method we could use in conjuction with the LD metric is a Gradient Bo
   'phone': ['']
 }
 ```
+
+#### Data Linkage Process
+<img src="https://user-images.githubusercontent.com/8730447/33004020-53c6ffac-cd8c-11e7-9789-92306d1e0dcb.png" width="500">
